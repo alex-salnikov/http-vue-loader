@@ -245,6 +245,7 @@
 		},
 
 		load: function(componentURL) {
+			this.componentURL = componentURL
 
 			return httpVueLoader.httpRequest(componentURL)
 			.then(function(responseText) {
@@ -298,7 +299,7 @@
 
 					var lang = eltCx.elt.getAttribute('lang');
 					eltCx.elt.removeAttribute('lang');
-					return httpVueLoader.langProcessor[lang.toLowerCase()].call(this, content === null ? eltCx.getContent() : content);
+					return httpVueLoader.langProcessor[lang.toLowerCase()].call(this, content === null ? eltCx.getContent() : content, this.componentURL);
 				}
 				return content;
 			}.bind(this))
